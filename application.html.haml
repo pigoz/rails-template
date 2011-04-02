@@ -14,18 +14,20 @@
     /[if lt IE 8]
       = stylesheet_link_tag 'compiled/ie.css', :media => 'screen, projection'
 
-  %body.bp.two-col
+  %body.bp
 
     #container
 
       #header
-        %h1 
-
-      #sidebar
-        %div item 1
-        %div item 2
-        %div item 3
-        %div item 4
+        #usermgmt
+          - if user_signed_in?
+            = "Signed in as #{current_user.email}. Not you? "
+            = link_to "Sign out", destroy_user_session_path
+          - else
+            = link_to "Sign in", new_user_session_path
+            = "or"
+            = link_to "Sign up", new_user_registration_path
+        %h1= "awesome app"
 
       #content
         - if show_title?
@@ -36,5 +38,4 @@
 
         = yield
 
-      #footer
-        = "awesome app"
+      #footer= "awesome app™"

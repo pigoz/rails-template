@@ -97,11 +97,7 @@ remove_file 'app/views/layouts/application.html.haml'
 file 'app/views/layouts/application.html.haml', read('application.html.haml')
 
 # make an application partial css
-file 'app/stylesheets/partials/_application.scss', <<-CSS
-#container {
-  @include showgrid;
-}
-CSS
+file 'app/stylesheets/partials/_application.scss', read('_application.scss')
 append_file 'app/stylesheets/screen.scss', <<-CODE
 
 // Add the application styles.
@@ -118,6 +114,9 @@ remove_file 'public/images/rails.png'
 ## Controllers
 ################################################################################
 generate 'controller home index'
+# drop in out view
+remove_file 'app/views/home/index.html.haml'
+file 'app/views/home/index.html.haml', read ('index.html.haml')
 
 ################################################################################
 ## Create routes

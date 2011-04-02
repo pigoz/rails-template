@@ -1,0 +1,15 @@
+body.bp {
+  #container {
+    margin: 20px auto; }}
+
+body {
+  #footer, #content {
+    text-align: center; }
+  #header {
+    h1 {
+      font-style: italic; } 
+    #usermgmt {
+      text-align: right; }}
+  #content {
+      h1 {
+        margin-top: 0.8em; }}}
