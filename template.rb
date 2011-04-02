@@ -123,11 +123,7 @@ generate 'controller home index'
 ## Create routes
 ################################################################################
 inject_into_file 'config/routes.rb', :after => 'routes.draw do' do
-<<-RUBY
-
-  devise_for :users
-  root :to => "home#index"
-RUBY
+  read('routes.rb')
 end
 
 ################################################################################
