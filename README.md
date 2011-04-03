@@ -4,7 +4,7 @@ rails-template
 The Rails 3 template I use. It is full of stuff:
 
     mongoid
-    nifty-generators
+    nifty-generators (with custom haml/compass/blueprint layout)
     haml
     compass
     devise

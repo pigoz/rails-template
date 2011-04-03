@@ -12,6 +12,14 @@ def read(file)
   File.new( File.expand_path(File.join('~/dev/rails-template/', file)) ).read
 end
 
+def stage(file)
+  file(file, read(file))
+end
+
+def newline
+  "\n"
+end
+
 ################################################################################
 ## Gems
 ################################################################################
@@ -47,8 +55,8 @@ generate 'mongoid:config'
 ################################################################################
 generate 'rspec:install'
 inject_into_file 'spec/spec_helper.rb', :after => 'config.mock_with :rspec' do
-# use database cleaner with mongoid
-<<-RUBY
+newline + newline + <<-RUBY
+  # use database cleaner with mongoid
   require 'database_cleaner'
 
   config.before(:suite) do
@@ -69,9 +77,7 @@ run "echo '--format documentation' >> .rspec"
 generate "devise:install"
 inject_into_file 'config/environments/development.rb',
        :after => 'config.action_dispatch.best_standards_support = :builtin' do
-<<-RUBY
-
-  # 
+newline + newline + <<-RUBY
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 RUBY
 end
@@ -81,9 +87,22 @@ generate "cancan:ability"
 ################################################################################
 ## Templating stuff
 ################################################################################
-generate 'nifty:layout --haml'
-remove_file 'app/views/layouts/application.html.erb' # use nifty layout instead
 generate 'nifty:config'
+generate 'nifty:layout --haml'
+remove_file 'app/views/layouts/application.html.erb'
+remove_file 'app/views/layouts/application.html.haml'
+remove_file 'public/stylesheets/application.css'
+remove_file 'public/stylesheets/sass/application.sass'
+
+inject_into_file 'app/controllers/application_controller.rb', :before => /^end$/ do
+newline + <<-RUBY
+  helper_method :app_name
+  private
+  def app_name
+    Rails.application.class.to_s.split("::").first
+  end
+RUBY
+end
 
 # initialize compass stuff
 sass_dir = "app/stylesheets"
@@ -93,13 +112,11 @@ compass_cmd << " --using blueprint/semantic"
 run compass_cmd
 
 # custom layout for compass
-remove_file 'app/views/layouts/application.html.haml' 
-file 'app/views/layouts/application.html.haml', read('application.html.haml')
+stage 'app/views/layouts/application.html.haml'
 
 # make an application partial css
-file 'app/stylesheets/partials/_application.scss', read('_application.scss')
-append_file 'app/stylesheets/screen.scss', <<-CODE
-
+stage 'app/stylesheets/partials/_application.scss'
+append_file 'app/stylesheets/screen.scss', newline + <<-CODE
 // Add the application styles.
 @import "partials/application";
 CODE
@@ -113,17 +130,43 @@ remove_file 'public/images/rails.png'
 ################################################################################
 ## Controllers
 ################################################################################
-generate 'controller home index'
+generate 'controller home index --skip-routes'
 # drop in out view
 remove_file 'app/views/home/index.html.haml'
-file 'app/views/home/index.html.haml', read ('index.html.haml')
+stage 'app/views/home/index.html.haml'
 
 ################################################################################
 ## Create routes
 ################################################################################
 inject_into_file 'config/routes.rb', :after => 'routes.draw do' do
-  read('routes.rb')
+  newline + read('routes.rb')
 end
+
+################################################################################
+## Customize devise
+################################################################################
+inject_into_file 'app/models/user.rb', :before => /^end$/ do
+newline + newline + <<-RUBY
+  field :username
+  field :email
+  validates_length_of :username, :minimum => 3
+RUBY
+end
+
+inject_into_file 'config/initializers/devise.rb',
+       :after => '  # config.authentication_keys = [ :email ]' do
+newline + <<-RUBY
+  config.authentication_keys = [ :username ]
+RUBY
+end
+
+gsub_file 'config/locales/devise.en.yml',
+          "invalid: 'Invalid email or password.'" do
+  "invalid: 'Invalid username or password.'"
+end
+
+stage 'app/views/devise/registrations/new.html.haml'
+stage 'app/views/devise/sessions/new.html.haml'
 
 ################################################################################
 ## metric_fu

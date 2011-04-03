@@ -1,0 +1,107 @@
+@import "compass/css3/gradient";
+@import "compass/css3/box-shadow";
+
+body.bp {
+  font-size: 0.8em;
+  background-color: $blueprint-background-color;
+  color: $font-color;
+  #container {
+    width: 75%;
+    margin: 0 auto;
+    background: white;
+    padding: 20px 40px;
+    border: solid 1px black;
+    margin: 20px auto; }
+  a {
+    color: $link-color;}}
+
+body {
+  #footer {
+    text-align: center; }
+  #header {
+    h1 {
+      font-style: italic; } 
+    #usermgmt {
+      text-align: right; }}
+  #content {
+    h1 {
+      margin-top: 0.8em; }}}
+
+form p label {
+  display: block;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#flash_notice, #flash_error, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: $success-bg-color;
+  color: $success-color;
+  border: solid 1px $success-border-color;
+}
+
+#flash_error, #flash_alert {
+  background-color: $error-bg-color;
+  color: $error-color;
+  border: solid 1px $error-border-color;
+}
+
+#error_explanation, .alert, .notice {
+  padding: 0.8em;
+  margin: 1em 0;
+  border: 1px solid #ddd;
+  line-height: 1.5em; }
+
+#error_explanation {
+  p, li, h3, h2 {
+    color: $error-color; }
+  h3 {
+    margin: 5px 0 0 0;
+  }
+  ul {
+    margin: 10px 0 0 20px!important;
+  }}
+
+#error_explanation, .alert {
+  background: $error-bg-color;
+  border-color: $error-border-color;
+  color: $error-color; }
+.alert a {
+  color: $error-color;
+  text-decoration: underline; }
+.notice {
+  background: $success-bg-color;
+  border-color: $success-border-color;
+  color: $success-color; }
+.notice a {
+  color: $success-color;
+  text-decoration: underline; }
+
+input[type="text"], input[type="password"], input[type="email"] {
+    border: 1px solid #B9B9B9;
+    color: #303030;
+    font-size: 1em;
+    line-height: 1em;
+    padding: 4px 4px 3px;
+    width: 225px;
+    @include linear-gradient(color-stops(white, white, white, #DDDDDD));
+}
+
+label {
+  font-size: 1.0em;
+  font-weight: bold;
+  vertical-align: baseline;
+}
+
+.field_with_errors label { color: $error-color;}
+.field_with_errors input {
+  border: 1px solid $error-border-color;
+  @include box-shadow($error-color, 0, 0, 2px, 0, false); }
