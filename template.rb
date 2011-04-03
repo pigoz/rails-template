@@ -29,6 +29,7 @@ gem 'haml-rails', :group => [ :development ]
 gem 'compass', '>= 0.10.6'
 gem 'mongoid',  '2.0.0.rc.8'
 gem 'bson_ext', '~> 1.2'
+gem 'simple_form'
 
 gem 'passenger'
 
@@ -93,13 +94,14 @@ remove_file 'app/views/layouts/application.html.erb'
 remove_file 'app/views/layouts/application.html.haml'
 remove_file 'public/stylesheets/application.css'
 remove_file 'public/stylesheets/sass/application.sass'
+generate 'simple_form:install'
 
 inject_into_file 'app/controllers/application_controller.rb', :before => /^end$/ do
 newline + <<-RUBY
   helper_method :app_name
   private
   def app_name
-    Rails.application.class.to_s.split("::").first
+    @app_name ||= Rails.application.class.to_s.split("::").first
   end
 RUBY
 end
@@ -116,6 +118,8 @@ stage 'app/views/layouts/application.html.haml'
 
 # make an application partial css
 stage 'app/stylesheets/partials/_application.scss'
+remove_file 'app/stylesheets/partials/_form.scss'
+stage 'app/stylesheets/partials/_form.scss'
 append_file 'app/stylesheets/screen.scss', newline + <<-CODE
 // Add the application styles.
 @import "partials/application";
@@ -146,7 +150,7 @@ end
 ## Customize devise
 ################################################################################
 inject_into_file 'app/models/user.rb', :before => /^end$/ do
-newline + newline + <<-RUBY
+<<-RUBY
   field :username
   field :email
   validates_length_of :username, :minimum => 3
