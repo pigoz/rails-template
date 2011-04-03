@@ -3,7 +3,8 @@ body.bp {
   background-color: $blueprint-background-color;
   color: $font-color;
   #container {
-    width: 75%;
+    @include container;
+    width: 950px;
     margin: 0 auto;
     background: white;
     padding: 20px 40px;
@@ -14,8 +15,11 @@ body.bp {
 
 body {
   #footer {
+    @include column(24);
+    margin-top: 3em;
     text-align: center; }
   #header {
+    @include column(24);
     h1 {
       font-style: italic; } 
     #usermgmt {

@@ -1,64 +1,47 @@
 @import "compass/css3/gradient";
+@import "blueprint/grid";
 
-.simple_form {
-  @include blueprint-form; // appling the blueprint form mixin to simple forms
-  input.text, input.title, input[type=email], input[type=text], input[type=password],
-  textarea {
-    @include linear-gradient(color-stops(white, white, white, $blueprint-table-stripe-color)); }}
-
-.simple_form label {
-  float: left;
-  width: 140px;
-  text-align: right;
-  margin: 7px 10px 0 0;
-}
-
-.simple_form div.input {
-  margin-bottom: 10px;
-}
-
-.simple_form input[type='submit'] {
-  background: -moz-linear-gradient(center top , #F4F4F4, #ECECEC) repeat scroll 0 0 transparent;
-  border: 1px solid #D4D4D4;
-  border-radius: 3px 3px 3px 3px;
-  color: #333333;
-  display: block;
-  font-weight: bold;
-  height: 2.4em;
-  margin: 0 0 0 150px;
-  padding: 0.4em 1em;
-  text-shadow: 0 1px 0 #FFFFFF;
-  &:hover {
-      background: -moz-linear-gradient(center top , #599BDC, #3072B3) repeat scroll 0 0 transparent;
-      border-color: #518CC6 #518CC6 #2A65A0;
-      color: #FFFFFF;
-      text-decoration: none;
-      text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+@mixin bluprint-inline-form-div {
+  line-height: 3;
+  div {
+    margin-bottom: 0; 
   }
 }
 
-.simple_form div.boolean label, .simple_form label.collection_radio {
-  margin: 2px 10px 0 0;
+.simple_form {
+  @include blueprint-form; // appling the blueprint form mixin to simple forms
+  @include bluprint-inline-form-div;
+  input.text, input.title, input[type=email], input[type=text], input[type=password],
+  textarea {
+    @include linear-gradient(color-stops(white, white, white, $blueprint-table-stripe-color));
+  }
+  div.input {
+    @include column(24);
+    label { @include column(9); @include clearfix; text-align: right;}
+  }
+  .buttons {
+    @include prepend(9);
+  }
 }
 
-.simple_form label.collection_radio {
-  margin-right: 10px;
-  margin-left: 2px;
-}
-
-.simple_form .error {
-  clear: left;
-  margin-left: 150px;
-  font-size: 12px;
-  color: #D00;
-  display: block;
-}
-
-.simple_form .hint {
-  clear: left;
-  margin-left: 150px;
-  font-size: 12px;
-  color: #555;
-  display: block;
-  font-style: italic;
+// fancy button style separated from the grid
+.simple_form {
+  .buttons {
+    input[type='submit'] {
+      background: -moz-linear-gradient(center top , #F4F4F4, #ECECEC) repeat scroll 0 0 transparent;
+      border: 1px solid #D4D4D4;
+      border-radius: 3px 3px 3px 3px;
+      color: #333333;
+      height: 2.5em;
+      font-weight: bold;
+      text-shadow: 0 1px 0 #FFFFFF;
+      &:hover {
+          background: -moz-linear-gradient(center top , #599BDC, #3072B3) repeat scroll 0 0 transparent;
+          border-color: #518CC6 #518CC6 #2A65A0;
+          color: #FFFFFF;
+          text-decoration: none;
+          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
 }

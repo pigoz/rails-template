@@ -5,4 +5,5 @@
   = f.input :password, :required => true
   - if devise_mapping.rememberable?
     = f.input :remember_me, :as => :boolean
-  = f.submit "Sign in"
+  .buttons
+    = f.submit "Sign in"
