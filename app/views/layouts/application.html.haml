@@ -26,7 +26,7 @@
             = link_to "Sign in", new_user_session_path
             = "or"
             = link_to "Sign up", new_user_registration_path
-        %h1= app_name
+        %h1= link_to app_name, root
 
       #content
         - if show_title?
