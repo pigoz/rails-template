@@ -80,6 +80,8 @@ inject_into_file 'config/environments/development.rb',
        :after => 'config.action_dispatch.best_standards_support = :builtin' do
 newline + newline + <<-RUBY
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.delivery_method = :sendmail
 RUBY
 end
 generate "mongoid:devise User"
@@ -171,6 +173,7 @@ end
 
 stage 'app/views/devise/registrations/new.html.haml'
 stage 'app/views/devise/sessions/new.html.haml'
+stage 'app/views/devise/mailer/confirmation_instructions.html.haml'
 
 ################################################################################
 ## metric_fu
