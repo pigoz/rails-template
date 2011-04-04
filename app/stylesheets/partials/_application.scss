@@ -20,7 +20,8 @@ body {
     text-align: center; }
   #header {
     @include column(24);
-    h1 {
+    #logo {
+      @include column(4);
       font-style: italic; } 
     #usermgmt {
       text-align: right; }}
