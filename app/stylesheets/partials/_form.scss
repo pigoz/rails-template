@@ -1,5 +1,7 @@
 @import "compass/css3/gradient";
 @import "blueprint/grid";
+@import "blueprint/buttons";
+@import "compass/css3/border-radius";
 
 @mixin bluprint-inline-form-div {
   line-height: 3;
@@ -21,27 +23,18 @@
   }
   .buttons {
     @include prepend(9);
-  }
-}
-
-// fancy button style separated from the grid
-.simple_form {
-  .buttons {
-    input[type='submit'] {
-      background: -moz-linear-gradient(center top , #F4F4F4, #ECECEC) repeat scroll 0 0 transparent;
-      border: 1px solid #D4D4D4;
-      border-radius: 3px 3px 3px 3px;
-      color: #333333;
-      height: 2.5em;
-      font-weight: bold;
-      text-shadow: 0 1px 0 #FFFFFF;
-      &:hover {
-          background: -moz-linear-gradient(center top , #599BDC, #3072B3) repeat scroll 0 0 transparent;
-          border-color: #518CC6 #518CC6 #2A65A0;
-          color: #FFFFFF;
-          text-decoration: none;
-          text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.3);
-      }
+    input, button {
+      @include button-colors;
+      @include button-active-colors;
+      @include button-hover-colors;
+      @include button-button;
+      @include border-radius;
     }
   }
 }
+
+// fixing blueprint
+.simple_form input[type="checkbox"],
+.simple_form input.checkbox,
+.simple_form input[type="radio"],
+.simple_form input.radio {top: 0.1em;}
