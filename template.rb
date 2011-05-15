@@ -37,6 +37,7 @@ gem 'bson_ext', '~> 1.2'
 gem 'simple_form'
 
 gem 'passenger'
+gem 'jquery-rails'
 
 # authentication and authorization
 gem 'devise'
@@ -100,6 +101,19 @@ RUBY
 end
 generate "mongoid:devise User"
 generate "cancan:ability"
+
+################################################################################
+## jQuery
+################################################################################
+generate 'jquery:install --ui'
+gsub_file 'config/application.rb',
+          'config.action_view.javascript_expansions[:defaults] = %w()' do
+<<-RUBY
+config.action_view.javascript_expansions[:defaults] =
+  %w(jquery.min jquery-ui.min rails)
+RUBY
+end
+
 
 ################################################################################
 ## Templating stuff

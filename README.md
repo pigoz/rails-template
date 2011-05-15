@@ -17,4 +17,4 @@ Usage:
 
     cd dev
     git clone git@github.com:pigoz/rails-template.git
-    rails new my_application -T -O -m rails-template/template.rb
+    rails new my_application -T -O -J -m rails-template/template.rb
