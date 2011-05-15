@@ -35,8 +35,6 @@ gem 'compass', '>= 0.10.6'
 gem 'mongoid',  '2.0.0.rc.8'
 gem 'bson_ext', '~> 1.2'
 gem 'simple_form'
-
-gem 'passenger'
 gem 'jquery-rails'
 
 # authentication and authorization
