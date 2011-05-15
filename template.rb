@@ -8,8 +8,12 @@ eos
 ################################################################################
 ## helper methods
 ################################################################################
+def origin(file)
+  File.expand_path(File.join('~/dev/rails-template/', file))
+end
+
 def read(file)
-  File.new( File.expand_path(File.join('~/dev/rails-template/', file)) ).read
+  File.new(origin(file)).read
 end
 
 def stage(file)
