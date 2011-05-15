@@ -36,6 +36,7 @@ gem 'mongoid',  '2.0.0.rc.8'
 gem 'bson_ext', '~> 1.2'
 gem 'simple_form'
 gem 'jquery-rails'
+gem 'inherited_resources'
 
 # authentication and authorization
 gem 'devise'
@@ -55,6 +56,7 @@ run 'bundle install'
 ## Setup Mongo
 ################################################################################
 generate 'mongoid:config'
+stage 'config/initializers/inherited_resources_mongoid.rb'
 
 ################################################################################
 ## Unit testing with Rspec
