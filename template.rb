@@ -45,8 +45,6 @@ gem 'cancan'
 
 # rspec, factory girl, webrat, autotest for testing
 gem 'capybara'
-gem 'cucumber'
-gem 'cucumber-rails'
 gem 'database_cleaner', :group => [ :development, :test ]
 gem 'rspec', :group => [ :development, :test ]
 gem 'rspec-rails', :group => [ :development, :test ]
@@ -80,12 +78,6 @@ newline + newline + <<-RUBY
 RUBY
 end
 run "echo '--format documentation' >> .rspec"
-
-################################################################################
-## Integration/Acceptance testing with Cucumber + Capybara
-################################################################################
-generate 'cucumber:install --capybara --rspec --skip-database'
-stage 'features/support/database_cleaner.rb'
 
 ################################################################################
 ## Authentication and authorization setup
