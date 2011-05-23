@@ -9,7 +9,7 @@ eos
 ## helper methods
 ################################################################################
 def origin(file)
-  File.expand_path(File.join('~/dev/rails-template/', file))
+  File.expand_path(File.join('~/dev/websites/rails-template/', file))
 end
 
 def read(file)
@@ -103,6 +103,9 @@ stage 'config/initializers/sass.rb'
 stage 'app/views/layouts/application.html.haml'
 stage 'app/assets/stylesheets/application.scss'
 stage 'app/assets/stylesheets/form.scss'
+
+gsub_file 'config/initializers/simple_form.rb',
+          '# config.html5 = true' do 'config.html5 = false' end
 
 ################################################################################
 ## Generate Home controller and view
