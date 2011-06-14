@@ -8,7 +8,9 @@ The Rails 3 template I use. Here's a list of gems:
     compass
     devise
     cancan
-    rspec (+ rspec-rails, + database_cleaner if using mongoid)
+    rspec-rails (+ database_cleaner if using mongoid)
+    rr
+    factory_girl
     metric_fu
 
 Usage:

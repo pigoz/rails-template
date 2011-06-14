@@ -55,12 +55,13 @@ gem RUBY_VERSION.include?('1.9') ? 'ruby-debug19' : 'ruby-debug', :group => [:de
 
 # authentication and authorization
 gem 'devise'
-gem 'cancan'
+#gem 'cancan'
 
 # rspec, factory girl, webrat, autotest for testing
 gem 'capybara', :group => [ :development, :test ]
-gem 'rspec', :group => [ :development, :test ]
 gem 'rspec-rails', :group => [ :development, :test ]
+gem 'rr', :group => [ :development, :test ]
+gem 'factory_girl', :group => [ :development, :test ]
 gem 'metric_fu', :group => [ :development, :test ]
 
 run 'bundle install'
@@ -80,6 +81,7 @@ end
 ## Unit testing with Rspec
 ################################################################################
 generate 'rspec:install'
+stage 'spec/spec_helper.rb'
 inject_into_file 'spec/spec_helper.rb', :after => 'config.mock_with :rspec' do
   newline + newline + read('share/database_cleaner_rspec_config.rb')
 end if use_mongoid
