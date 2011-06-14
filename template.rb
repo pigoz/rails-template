@@ -51,6 +51,7 @@ end
 # awesome
 gem 'inherited_resources'
 gem 'simple_form'
+gem RUBY_VERSION.include?('1.9') ? 'ruby-debug19' : 'ruby-debug', :group => [:development]
 
 # authentication and authorization
 gem 'devise'
