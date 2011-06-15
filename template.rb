@@ -58,11 +58,13 @@ gem 'devise'
 #gem 'cancan'
 
 # rspec, factory girl, webrat, autotest for testing
-gem 'capybara', :group => [ :development, :test ]
-gem 'rspec-rails', :group => [ :development, :test ]
-gem 'rr', :group => [ :development, :test ]
-gem 'factory_girl', :group => [ :development, :test ]
-gem 'metric_fu', :group => [ :development, :test ]
+gem 'capybara', :group => [:development, :test] 
+gem 'rspec-rails', :group => [:development, :test] 
+gem 'rr', :group => [:development, :test] 
+gem 'factory_girl', :group => [:development, :test] 
+gem 'spork', '~> 0.9.0.rc', :group => [:development, :test] 
+gem 'metric_fu', :group => [:development, :test] 
+
 
 run 'bundle install'
 
@@ -85,7 +87,7 @@ stage 'spec/spec_helper.rb'
 inject_into_file 'spec/spec_helper.rb', :after => 'config.mock_with :rspec' do
   newline + newline + read('share/database_cleaner_rspec_config.rb')
 end if use_mongoid
-run "echo '--format documentation' >> .rspec"
+run "echo '--colour --format documentation --drb' >> .rspec"
 
 ################################################################################
 ## Authentication and authorization setup
@@ -160,6 +162,12 @@ gsub_file 'config/locales/devise.en.yml',
 stage 'app/views/devise/registrations/new.html.haml'
 stage 'app/views/devise/sessions/new.html.haml'
 stage 'app/views/devise/mailer/confirmation_instructions.html.haml'
+
+################################################################################
+## Spork
+################################################################################
+gsub_file 'config/environments/test.rb', 'config.cache_classes = true' do
+                                         'config.cache_classes = false' end
 
 ################################################################################
 ## metric_fu
